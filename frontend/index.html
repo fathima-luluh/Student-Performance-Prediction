@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Performance Dashboard</title>
+</head>
+
+<body style="font-family:Arial; text-align:center; padding:40px;">
+
+<h2>Student Performance Predictor</h2>
+
+<input id="study" placeholder="Study Hours"><br><br>
+<input id="attendance" placeholder="Attendance"><br><br>
+<input id="marks" placeholder="Previous Marks"><br><br>
+
+<button onclick="predict()">Predict</button>
+
+<h3 id="result"></h3>
+
+<script>
+async function predict() {
+    const data = {
+        study_hours: parseInt(document.getElementById("study").value),
+        attendance: parseInt(document.getElementById("attendance").value),
+        previous_marks: parseInt(document.getElementById("marks").value)
+    };
+
+    const response = await fetch("http://127.0.0.1:8000/predict", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    // ✅ Everything must be inside function
+    let text = "Prediction: " + result.prediction + 
+               " | Confidence: " + result.confidence;
+
+    let resultBox = document.getElementById("result");
+
+    resultBox.innerText = text;
+
+    if(result.prediction === "PASS"){
+        resultBox.style.color = "green";
+    } else {
+        resultBox.style.color = "red";
+    }
+}
+</script>
+</body>
+</html>
