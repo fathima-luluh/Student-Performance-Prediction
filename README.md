@@ -1,72 +1,160 @@
-🎓 Student Performance Prediction System
-
-📌 Overview
+\# Student Performance Prediction System
 
 
 
-This project is an end-to-end Machine Learning system that predicts whether a student will pass or fail based on academic and behavioral data.
+\## Overview
 
 
 
-It also provides explainability using Feature Importance and SHAP.
+This project predicts student academic performance using Machine Learning techniques.
 
 
 
-🚀 Features
-
-📊 Synthetic data generation
-
-🧠 Machine Learning model (Random Forest)
-
-📈 Model evaluation (Accuracy: 95%)
-
-⚡ FastAPI deployment
-
-🔍 Explainability:
-
-Feature Importance
-
-SHAP (global \& local explanations)
-
-🛠️ Tech Stack
-
-Python
-
-Pandas, NumPy
-
-Scikit-learn
-
-SHAP
-
-FastAPI
-
-Matplotlib
-
-📂 Project Structure
-
-src/        → ML pipeline
-
-data/       → dataset
-
-models/     → trained model
-
-outputs/    → visualizations
-
-📊 Model Performance
-
-Accuracy: 95%
-
-F1 Score: \~0.95
-
-📸 Outputs
-
-Feature Importance
+The system analyzes student-related factors such as:
 
 
 
-SHAP Summary
+\- Attendance
+
+\- Study Hours
+
+\- Quiz Scores
+
+\- Assignment Scores
+
+\- Midterm Marks
+
+\- LMS Activity
 
 
 
-SHAP Bar
+and predicts whether a student is likely to pass or fail.
+
+
+
+\---
+
+
+
+\# Features
+
+
+
+\- Synthetic student dataset generation
+
+\- Machine Learning prediction model
+
+\- FastAPI backend API
+
+\- Student risk prediction
+
+\- Model evaluation metrics
+
+\- Data visualizations
+
+\- Feature importance analysis
+
+
+
+\---
+
+
+
+\# Tech Stack
+
+
+
+\- Python
+
+\- Pandas
+
+\- NumPy
+
+\- Scikit-learn
+
+\- FastAPI
+
+\- Matplotlib
+
+
+
+\---
+
+
+
+\# Machine Learning Workflow
+
+
+
+Student Data
+
+→ Data Preprocessing
+
+→ Model Training
+
+→ Prediction
+
+→ Risk Analysis
+
+
+
+\---
+
+
+
+\# Model Used
+
+
+
+\- Random Forest Classifier
+
+
+
+\---
+
+
+
+\# Accuracy
+
+
+
+Model Accuracy: 94%
+
+
+
+\---
+
+
+
+\# API Endpoint
+
+
+
+POST `/predict`
+
+
+
+Example JSON:
+
+
+
+```json
+
+{
+
+&#x20; "attendance\_pct": 85,
+
+&#x20; "study\_hours\_wk": 15,
+
+&#x20; "quiz\_avg": 78,
+
+&#x20; "assign\_avg": 80,
+
+&#x20; "midterm": 74,
+
+&#x20; "lms\_logins\_wk": 10,
+
+&#x20; "forum\_posts": 5
+
+}
 

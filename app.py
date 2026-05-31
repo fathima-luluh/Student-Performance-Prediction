@@ -1,37 +1,34 @@
-import joblib
-import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel
-from fastapi.middleware.cors import CORSMiddleware
-
-# Load model
-model = joblib.load("models/model.pkl")
+import joblib
+import pandas as pd
 
 app = FastAPI()
 
-# Enable CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+model = joblib.load("student_model.joblib")
 
 class Student(BaseModel):
-    study_hours: int
-    attendance: int
-    previous_marks: int
+    attendance_pct: int
+    study_hours_wk: int
+    quiz_avg: int
+    assign_avg: int
+    midterm: int
+    lms_logins_wk: int
+    forum_posts: int
 
+@app.get("/")
+def home():
+    return {"message": "Student Performance Prediction API"}
 
 @app.post("/predict")
-def predict(data: Student):
-    df = pd.DataFrame([data.dict()])
+def predict(student: Student):
 
-    prediction = model.predict(df)[0]
-    prob = model.predict_proba(df)[0][1]
+    data = pd.DataFrame([student.dict()])
+
+    prediction = model.predict(data)[0]
+    probability = model.predict_proba(data)[0][1]
 
     return {
-        "prediction": "PASS" if prediction == 1 else "FAIL",
-        "confidence": f"{round(prob * 100, 2)}%"
+        "prediction": int(prediction),
+        "risk_probability": float(probability)
     }
